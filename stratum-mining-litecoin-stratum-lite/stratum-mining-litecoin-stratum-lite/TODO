@@ -1,0 +1,19 @@
+TODO File (in no particular order):
+
+SQL Connection pooling: sqlalchemy
+
+Add a "script" to add,list,disable users
+
+Variable difficulty should not be able to go higher than current difficulty
+
+Add difficulty to database on submit share.
+
+Test NON-Local Coinbase with testnet in a box
+
+verify settings
+
+send e-mail on dead miner
+
+send e-mail on dead bitcoind
+
+

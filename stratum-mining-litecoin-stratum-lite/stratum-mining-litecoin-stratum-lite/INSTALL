@@ -1,0 +1,75 @@
+Installation Instructions
+=========================
+
+Step 0. Install litecoind
+	NOTE: Litecoind currently only supports getblocktemplate version 1. This code was changed to support version 1.
+	Set it up and start it!
+	Downloading the blockchain can take a few hours to a couple days!
+
+Step 1. Install the stratum core
+	git pull https://github.com/slush0/stratum.git
+	sudo easy_install stratum
+	  (or if using alternate python: sudo /usr/local/bin/easy_install stratum)
+
+Step 2. Pull a copy of the miner
+	git pull https://github.com/moopless/stratum-mining-litecoin.git
+
+Step 3. Configure the Miner
+	cp conf/config_sample.py conf/config.py
+	make your changes to conf/config.py 
+	Make sure you set the values in BASIC SETTINGS! These are how to connect to litecoind
+	  and where your money goes!
+
+Step 4. Run the pool
+	twistd -ny launcher.tac -l -
+	OR - using alternate python
+	/usr/local/bin/twistd -ny launcher.tac -l -
+
+You can now set the URL on your stratum proxy (or miner that supports stratum) to:
+http://YOURHOSTNAME:3333
+
+Database Setup
+=========================
+Table Creation: Tables are auto-created if they don't exist (I will be adding a schema file later)
+
+None:
+Well, this doesn't do anything, so there is nothing to set up
+
+Sqlite:
+THIS IS THE DEFAULT!
+Just set the file path in the config file (or keep the default.)
+Support for sqlite3 is built into recent python versions.
+A couple notes for Sqlite:
+	- Sqlite and threading/concurancy just doesn't work right for that reason it is disabled.
+	- Since threading is disabled, The server will "pause" when archiving happens, this will affect
+		your miners. However this will not happen often (24 hours after finding a share)
+
+Postgresql:
+1. Set up your parameters in the config file.
+2. Install the postgresql libraries in your os:
+	Redhat and the like:
+		yum install postgresql-libs postgresql-devel
+	Ubuntu and the like:
+		apt-get install postgresql postgresql-devel
+3. Install the python bindings
+	easy_install psycopg2
+
+Mysql:
+1. Set up your parameters in the config file.
+2. Install the mysql libraries in your os:
+	Redhat and the like:
+		yum install mysql mysql-devel
+	Ubuntu and the like:
+		apt-get install mysql mysql-devel
+3. Install the python bindings
+	easy_install mysql-python
+4. Create a database and user.
+
+Problems????
+=========================
+
+Is your firewall off?
+Is litecoin running?
+
+TODO: are there other problems?
+
